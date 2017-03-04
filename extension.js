@@ -1,5 +1,6 @@
 var vscode = require("vscode");
-var config = require("./prefixes.json");
+var prefixes = require("./prefixes.json");
+var config = require("./config.json");
 
 var femaleColour = null;
 var maleColour = null;
@@ -44,11 +45,14 @@ var genderDecode = function()
 
     var message = "";
 
-    if (female == male) {
+    if (female == male)
+    {
         message += "Gender neutral";
-    } else if (female > male) {
+    } else if (female > male)
+    {
         message += "Feminine-coded";
-    } else {
+    } else
+    {
         message += "Masculine-coded";
     }
 
@@ -75,26 +79,32 @@ var prefixArrayToRegex = function(prefixArray)
     return new RegExp("\\b((?:" +  prefixArray.join(".*?)|(?:") + ".*?))\\b", "ig");
 }
 
+var createColour = function(colour)
+{
+    return vscode.window.createTextEditorDecorationType({
+        backgroundColor: colour
+    });
+}
+
 function activate(context)
 {
-    femaleColour = vscode.window.createTextEditorDecorationType({
-        backgroundColor: "#fa72ff"
-    });
-    maleColour = vscode.window.createTextEditorDecorationType({
-        backgroundColor: "#4f91ff"
-    });
+    femaleColour = createColour(config.colours.female);
+    maleColour = createColour(config.colours.male);
 
-    femaleRegex = prefixArrayToRegex(config.female);
-    maleRegex = prefixArrayToRegex(config.male);
+    femaleRegex = prefixArrayToRegex(prefixes.female);
+    maleRegex = prefixArrayToRegex(prefixes.male);
 
-    var disposable = vscode.commands.registerCommand('extension.genderDecode', genderDecode);
-    context.subscriptions.push(disposable);
+    context.subscriptions.push(
+        vscode.commands.registerCommand('extension.genderDecode', genderDecode)
+    );
 
-    var disposable = vscode.commands.registerCommand('extension.clearGenderDecode', clearGenderDecode);
-    context.subscriptions.push(disposable);
+    context.subscriptions.push(
+        vscode.commands.registerCommand('extension.clearGenderDecode', clearGenderDecode)
+    );
 }
 exports.activate = activate;
 
 function deactivate() {
+    clearGenderDecode();
 }
 exports.deactivate = deactivate;
