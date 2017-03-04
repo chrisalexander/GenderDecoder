@@ -8,11 +8,10 @@ var maleColour = null;
 var femaleRegex = null;
 var maleRegex = null;
 
-var applyAndCountColours = function(editor, colour, regex)
+var getRangedMatches = function(editor, regex)
 {
+    var matches = [];
     var allText = editor.document.getText();
-
-    var toApply = [];
 
     var match;
     while ((match = regex.exec(allText)) !== null)
@@ -24,12 +23,19 @@ var applyAndCountColours = function(editor, colour, regex)
             range: new vscode.Range(start, end)
         }
 
-        toApply.push(decoration);
+        matches.push(decoration);
     }
 
-    editor.setDecorations(colour, toApply);
+    return matches;
+}
 
-    return toApply.length;
+var applyAndCountColours = function(editor, colour, regex)
+{
+    var matches = getRangedMatches(editor, regex);
+
+    editor.setDecorations(colour, matches);
+
+    return matches.length;
 }
 
 var genderDecode = function()
