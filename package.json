@@ -3,7 +3,7 @@
     "displayName": "Gender Decoder",
     "description": "Parse your documents and flag male or female oriented terms",
     "version": "0.0.1",
-    "publisher": "ChrisAlexander",
+    "publisher": "chrisalexander",
     "engines": {
         "vscode": "^1.10.0"
     },
@@ -18,6 +18,10 @@
         "diversity"
     ],
     "license": "MIT",
+    "repository": {
+        "type": "github",
+        "url": "https://github.com/chrisalexander/GenderDecoder"
+    },
     "main": "./extension",
     "activationEvents": [
         "onCommand:extension.genderDecode"
