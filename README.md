@@ -8,7 +8,7 @@ It is based on [Kat Matfield's Gender Decoder](http://gender-decoder.katmatfield
 
 Issue the "Gender Decoder" command to highlight male and female biased words in your document.
 
-\!\[Screenshot\]\(screenshot.png\)
+![Screenshot](screenshot.png)
 
 The "Clear Gender Decoder" command removes highlights.
 
