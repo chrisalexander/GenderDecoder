@@ -2,7 +2,7 @@
     "name": "genderdecoder",
     "displayName": "Gender Decoder",
     "description": "Parse your documents and flag male or female oriented terms",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "publisher": "chrisalexander",
     "engines": {
         "vscode": "^1.10.0"
